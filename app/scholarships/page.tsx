@@ -4,9 +4,21 @@ import { useState, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
+// Define the type for each scholarship
+type Scholarship = {
+  id: string;
+  name: string;
+  deadline: string;
+  amount: string;
+  description: string;
+  requirements: string;
+}
+
 export default function Scholarships() {
   const [searchTerm, setSearchTerm] = useState("")
-  const [scholarships, setScholarships] = useState([])
+  
+  // Explicitly type the scholarships state
+  const [scholarships, setScholarships] = useState<Scholarship[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -14,7 +26,7 @@ export default function Scholarships() {
       try {
         const response = await fetch("/api/scholarships")
         if (!response.ok) throw new Error("Failed to fetch")
-        const data = await response.json()
+        const data: Scholarship[] = await response.json() // Type the response as an array of scholarships
         setScholarships(data)
       } catch (error) {
         console.error("Error:", error)
@@ -26,6 +38,7 @@ export default function Scholarships() {
     fetchScholarships()
   }, [])
 
+  // Filter scholarships based on the search term
   const filteredScholarships = scholarships.filter((scholarship) =>
     scholarship.name.toLowerCase().includes(searchTerm.toLowerCase()),
   )
@@ -39,19 +52,18 @@ export default function Scholarships() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8" >
+    <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-zinc-100 mb-8">Available Scholarships</h1>
-      <div className="mb-8 ">
+      <div className="mb-8">
         <Input
           type="text"
           placeholder="Search scholarships..."
-         
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="max-w-md text-zinc-900 bg-zinc-300"
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredScholarships.map((scholarship) => (
           <div key={scholarship.id} className="gradient-border">
             <div className="p-6 card-hover">
@@ -68,4 +80,3 @@ export default function Scholarships() {
     </div>
   )
 }
-
