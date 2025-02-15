@@ -4,15 +4,15 @@ import Image from "next/image"
 export default function Home() {
   return (
     <div className="bg-white">
-      <section className="hero-pattern text-white py-20 border-white">
+      <section className="hero-pattern text-white py-12 md:py-20 border-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="md:w-1/2">
-              <h1 className="text-5xl font-bold mb-6">Welcome to McRoberts Scholars</h1>
+            <div className="md:w-1/2 text-center md:text-left">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Welcome to McRoberts Scholars</h1>
               <p className="text-xl mb-8 text-secondary">Empowering students with scholarship opportunities</p>
               <Link
                 href="/scholarships"
-                className="bg-accent text-bg-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block"
+                className="bg-accent text-bg-white px-6 py-3 md:px-8 md:py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block"
               >
                 Explore Scholarships
               </Link>
