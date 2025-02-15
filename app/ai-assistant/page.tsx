@@ -7,18 +7,18 @@ import ReactMarkdown from "react-markdown";
 
 export default function AIAssistant() {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-  
+
     setIsLoading(true);
     const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
-  
+
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -29,14 +29,14 @@ export default function AIAssistant() {
           messages: [...messages, userMessage],
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Failed to get response");
       }
-  
+
       const data = await response.json();
       const assistantMessage = data.choices[0].message;
-  
+
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error:", error);
@@ -51,7 +51,7 @@ export default function AIAssistant() {
       setIsLoading(false);
     }
   };
-  
+
   return (
     <div className="min-h-screen bg-muted px-4 py-8">
       <div className="container mx-auto">
