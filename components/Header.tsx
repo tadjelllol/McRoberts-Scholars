@@ -1,42 +1,58 @@
+"use client"
+
 import Link from "next/link"
-import Image from "next/image"
+import { useState } from "react"
+import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export default function Header() {
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   return (
-    <header className="bg-[hsl(222.2,84%,4.9%)] border-b border-white">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/Untitled.png"
-              alt="McRoberts Scholars Logo"
-              width={40}
-              height={40}
-              className="rounded-full bg-white p-0.5"
-            />
-            <span className="text-2xl font-bold text-white">McRoberts Scholars</span>
+    <header className="bg-background text-foreground py-4 px-6 md:px-8">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link href="/" className="text-2xl font-bold">
+          McRoberts Scholars
+        </Link>
+        <nav className="hidden md:flex space-x-4">
+          <Link href="/scholarships" className="hover:text-accent">
+            Scholarships
           </Link>
-          <ul className="flex items-center space-x-6">
-            <li>
-              <Link href="/scholarships" className="text-white hover:text-secondary transition-colors">
-                Scholarships
-              </Link>
-            </li>
-            <li>
-              <Link href="/ai-assistant" className="text-white hover:text-secondary transition-colors">
-                AI Assistant
-              </Link>
-            </li>
-            <li>
-              <Link href="/resources" className="text-white hover:text-secondary transition-colors">
-                Resources
-              </Link>
-            </li>
-          </ul>
+          <Link href="/ai-assistant" className="hover:text-accent">
+            AI Assistant
+          </Link>
+          <Link href="/resources" className="hover:text-accent">
+            Resources
+          </Link>
+        </nav>
+        <Button className="hidden md:block bg-accent text-accent-foreground hover:bg-opacity-90">Join Discord</Button>
+        <button className="md:hidden" onClick={toggleMenu}>
+          <Menu className="h-6 w-6" />
+        </button>
+      </div>
+      {isMenuOpen && (
+        <div className="md:hidden mt-4">
+          <nav className="flex flex-col space-y-2">
+            <Link href="/scholarships" className="hover:text-accent">
+              Scholarships
+            </Link>
+            <Link href="/ai-assistant" className="hover:text-accent">
+              AI Assistant
+            </Link>
+            <Link href="/resources" className="hover:text-accent">
+              Resources
+            </Link>
+            <Button className="bg-accent text-accent-foreground hover:bg-opacity-90 w-full">Join Discord</Button>
+          </nav>
         </div>
-      </nav>
+      )}
     </header>
   )
 }
+
+export default Header
 
