@@ -1,6 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 type Resource = {
   id: string;
@@ -15,14 +21,14 @@ export default function Resources() {
   useEffect(() => {
     const fetchResources = async () => {
       try {
-        const res = await fetch("/api/resources");
-        const data: Resource[] = await res.json();
+        let { data, error } = await supabase.from("resources").select("*");
 
-        // Ensure data has valid structure
-        if (Array.isArray(data) && data.every(item => "id" in item && "title" in item)) {
+        if (error) {
+          throw error;
+        }
+
+        if (data) {
           setResources(data);
-        } else {
-          console.error("Invalid resource data format:", data);
         }
       } catch (error) {
         console.error("Error fetching resources:", error);
@@ -41,7 +47,9 @@ export default function Resources() {
             resources.map((resource) => (
               <div key={resource.id} className="gradient-border">
                 <div className="p-6 card-hover bg-white rounded-lg shadow-md">
-                  <h2 className="text-xl font-semibold mb-2 text-white">{resource.title}</h2>
+                  <h2 className="text-xl font-semibold mb-2 text-white">
+                    {resource.title}
+                  </h2>
                   <p className="text-zinc-300 mb-4">Type: {resource.type}</p>
                   <Button asChild className="bg-accent text-accent-foreground hover:bg-opacity-90">
                     <a href={resource.link} target="_blank" rel="noopener noreferrer">

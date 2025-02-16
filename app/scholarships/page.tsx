@@ -6,17 +6,18 @@ import { Button } from "@/components/ui/button"
 
 // Define the type for each scholarship
 type Scholarship = {
-  id: string;
-  name: string;
-  deadline: string;
-  amount: string;
-  description: string;
-  requirements: string;
+  id: string
+  name: string
+  deadline: string
+  amount: string
+  description: string
+  requirements: string
+  link: string // Add the link property
 }
 
 export default function Scholarships() {
   const [searchTerm, setSearchTerm] = useState("")
-  
+
   // Explicitly type the scholarships state
   const [scholarships, setScholarships] = useState<Scholarship[]>([])
   const [loading, setLoading] = useState(true)
@@ -25,7 +26,7 @@ export default function Scholarships() {
     async function fetchScholarships() {
       try {
         const response = await fetch("/api/scholarships")
-        if (!response.ok) throw new Error("Failed to fetch")
+        if (!response.ok) throw new Error("Failed to fetch scholarships")
         const data: Scholarship[] = await response.json() // Type the response as an array of scholarships
         setScholarships(data)
       } catch (error) {
@@ -40,7 +41,7 @@ export default function Scholarships() {
 
   // Filter scholarships based on the search term
   const filteredScholarships = scholarships.filter((scholarship) =>
-    scholarship.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    scholarship.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   if (loading) {
@@ -72,7 +73,13 @@ export default function Scholarships() {
               <p className="text-zinc-100 mb-2">Amount: {scholarship.amount}</p>
               <p className="text-zinc-100 mb-4">{scholarship.description}</p>
               <p className="text-sm text-zinc-100 mb-4">Requirements: {scholarship.requirements}</p>
-              <Button className="bg-accent text-accent-foreground hover:bg-opacity-90">Apply Now</Button>
+              {/* Button now links to the scholarship's link */}
+              <Button 
+                className="bg-accent text-accent-foreground hover:bg-opacity-90"
+                onClick={() => window.open(scholarship.link, "_blank")} // Opens the scholarship link in a new tab
+              >
+                Apply Now
+              </Button>
             </div>
           </div>
         ))}

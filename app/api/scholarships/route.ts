@@ -1,16 +1,24 @@
 import { NextResponse } from "next/server"
-import fs from "fs"
-import path from "path"
+import { createClient } from "@supabase/supabase-js"
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!, // Your Supabase URL
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY! // Your Supabase anonymous key
+)
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), "data", "scholarships.txt")
-    const content = await fs.promises.readFile(filePath, "utf8")
-    const scholarships = JSON.parse(content)
-    return NextResponse.json(scholarships)
+    const { data, error } = await supabase
+      .from('scholarships') // Assuming your table is called 'scholarships'
+      .select('*')
+
+    if (error) {
+      throw error
+    }
+
+    return NextResponse.json(data)
   } catch (error) {
-    console.error("Error reading scholarships:", error)
+    console.error("Error fetching scholarships:", error)
     return NextResponse.json({ error: "Failed to load scholarships" }, { status: 500 })
   }
 }
-
