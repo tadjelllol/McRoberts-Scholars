@@ -29,7 +29,11 @@ const Header = () => {
             Resources
           </Link>
         </nav>
-        <Button className="hidden md:block bg-accent text-accent-foreground hover:bg-opacity-90">Join Discord</Button>
+        <a href="https://discord.gg/j8SP6zxraN" target="_blank" rel="noopener noreferrer">
+          <Button className="hidden md:block bg-accent text-accent-foreground hover:bg-opacity-90">
+            Join Discord
+          </Button>
+        </a>
         <button className="md:hidden" onClick={toggleMenu}>
           <Menu className="h-6 w-6" />
         </button>
@@ -46,7 +50,11 @@ const Header = () => {
             <Link href="/resources" className="hover:text-accent">
               Resources
             </Link>
-            <Button className="bg-accent text-accent-foreground hover:bg-opacity-90 w-full">Join Discord</Button>
+            <a href="https://discord.gg/j8SP6zxraN" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-accent text-accent-foreground hover:bg-opacity-90 w-full">
+                Join Discord
+              </Button>
+            </a>
           </nav>
         </div>
       )}
@@ -55,4 +63,3 @@ const Header = () => {
 }
 
 export default Header
-
