@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import { ArrowRight, Sparkles, BookOpen, MessageCircle } from "lucide-react"
 
 export default function Home() {
   return (
@@ -12,15 +13,16 @@ export default function Home() {
               <p className="text-xl mb-8 text-secondary">Empowering students with scholarship opportunities</p>
               <Link
                 href="/scholarships"
-                className="bg-accent text-bg-white px-6 py-3 md:px-8 md:py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block"
+                className="bg-accent text-bg-white px-6 py-3 md:px-8 md:py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-flex items-center group"
               >
                 Explore Scholarships
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div className="animate-float">
                 <Image
-                  src="/Untitled.png"
+                  src="/Untitled_enhanced.png"
                   alt="McRoberts Scholars Logo"
                   width={300}
                   height={300}
@@ -36,36 +38,57 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="gradient-border">
             <div className="p-6 card-hover bg-zinc-900">
-              <h2 className="text-2xl font-semibold mb-4 text-white">Scholarships</h2>
+              <div className="flex items-center mb-4">
+                <Sparkles className="w-8 h-8 text-accent" />
+                <h2 className="text-2xl font-semibold ml-3 text-white">Scholarships</h2>
+              </div>
               <p className="text-zinc-200 mb-4">
                 Discover and apply for a wide range of scholarships tailored for McRoberts students.
               </p>
-              <Link href="/scholarships" className="text-accent font-semibold hover:text-secondary transition-colors">
-                Learn More →
+              <Link
+                href="/scholarships"
+                className="text-accent font-semibold hover:text-secondary transition-colors inline-flex items-center group"
+              >
+                Learn More
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
 
           <div className="gradient-border">
             <div className="p-6 card-hover bg-zinc-900">
-              <h2 className="text-2xl font-semibold mb-4 text-white">AI Assistant</h2>
+              <div className="flex items-center mb-4">
+                <MessageCircle className="w-8 h-8 text-accent" />
+                <h2 className="text-2xl font-semibold ml-3 text-white">AI Assistant</h2>
+              </div>
               <p className="text-zinc-200 mb-4">
                 Get instant answers to your questions about scholarships and applications.
               </p>
-              <Link href="/ai-assistant" className="text-accent font-semibold hover:text-secondary transition-colors">
-                Chat Now →
+              <Link
+                href="/ai-assistant"
+                className="text-accent font-semibold hover:text-secondary transition-colors inline-flex items-center group"
+              >
+                Chat Now
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
 
           <div className="gradient-border">
             <div className="p-6 card-hover bg-zinc-900">
-              <h2 className="text-2xl font-semibold mb-4 text-white">Resources</h2>
+              <div className="flex items-center mb-4">
+                <BookOpen className="w-8 h-8 text-accent" />
+                <h2 className="text-2xl font-semibold ml-3 text-white">Resources</h2>
+              </div>
               <p className="text-zinc-200 mb-4">
                 Access meeting videos, guides, and other helpful content for your scholarship journey.
               </p>
-              <Link href="/resources" className="text-accent font-semibold hover:text-secondary transition-colors">
-                View Resources →
+              <Link
+                href="/resources"
+                className="text-accent font-semibold hover:text-secondary transition-colors inline-flex items-center group"
+              >
+                View Resources
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -82,9 +105,10 @@ export default function Home() {
             href="https://discord.gg/j8SP6zxraN"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block"
+            className="bg-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-flex items-center group"
           >
             Join Our Discord
+            <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
       </section>

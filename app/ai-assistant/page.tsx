@@ -6,8 +6,6 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import ReactMarkdown from "react-markdown"
-import Link from "next/link"
-import Image from "next/image"
 
 export default function AIAssistant() {
   const [input, setInput] = useState("")
@@ -58,33 +56,6 @@ export default function AIAssistant() {
 
   return (
     <div className="min-h-screen bg-muted px-4 py-8">
-      <section className="hero-pattern text-white py-20 border-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="md:w-1/2 text-center md:text-left">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Welcome to McRoberts Scholars</h1>
-              <p className="text-xl mb-8 text-secondary">Empowering students with scholarship opportunities</p>
-              <Link
-                href="/scholarships"
-                className="bg-accent text-bg-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block"
-              >
-                Explore Scholarships
-              </Link>
-            </div>
-            <div className="md:w-1/2 flex justify-center">
-              <div className="animate-float">
-                <Image
-                  src="/Untitled.png"
-                  alt="McRoberts Scholars Logo"
-                  width={300}
-                  height={300}
-                  className="rounded-full bg-white p-2"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <div className="container mx-auto">
         <h1 className="text-4xl font-bold text-zinc-100 mb-8">AI Assistant</h1>
         <div className="bg-white rounded-lg shadow-md overflow-hidden gradient-border">
